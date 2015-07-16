@@ -1,5 +1,6 @@
 var _ = require('lodash'),
     cheerio = require('cheerio'),
+    S = require('string'),
 
     AutoLink = {};
 
@@ -75,7 +76,7 @@ AutoLink.link = function(html, option) {
         newNode.html('');
         node.contents().each(function() {
             if (this.type === 'text') {
-                newNode.append(replaceURLWithHTMLLinks(this.data));
+                newNode.append(replaceURLWithHTMLLinks(S(this.data).escapeHTML().s));
             } else {
                 var n = $(this);
                 if (noLink(n)) {

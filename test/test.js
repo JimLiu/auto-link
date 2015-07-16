@@ -12,6 +12,13 @@ describe('auto-link', function() {
       done();
     });
 
+    it('should keep the &lt; tag after replaced a url', function(done) {
+      var raw = '<p>Welcom to www.google.com</p>&lt;abc';
+      var html = autoLink.link(raw);
+      html.should.equal('<p>Welcom to <a href="http://www.google.com">www.google.com</a></p>&lt;abc');
+      done();
+    });
+
     it('should keep attributes after replace a url', function(done) {
       var raw = '<p class="myclass" id="p1">Welcom to www.google.com</p>';
       var html = autoLink.link(raw);
